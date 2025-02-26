@@ -1,5 +1,7 @@
 # 🔍 CrazyScanner [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![Python Version](https://img.shields.io/badge/python-3.8%2B-blue) [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+<img src="https://raw.githubusercontent.com/Akkaiaj/CrazyScanner/main/a08a504c-077f-48d3-babb-5782437734b3.jpg" alt="CrazyScanner Logo" width="300">
+
 > **A fast and advanced vulnerability scanner for SQL Injection and XSS**  
 > *Uncover hidden vulnerabilities like a pro!*
 
