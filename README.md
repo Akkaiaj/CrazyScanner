@@ -49,21 +49,21 @@ cd CrazyScanner
 pip install -r requirements.txt
 
 # Run scanner
-python crazy_scanner.py --url https://target.com
+python cli.py --url https://target.com
 
 ## 🔧 Usage
 ```bash
 # Basic scan
-python crazy_scanner.py --url https://example.com
+python cli.py --url https://example.com
 
 # Custom payload scan
-python crazy_scanner.py --url https://example.com --payloads sql,xss
+python cli.py --url https://example.com --payloads sql,xss
 
 # Save HTML report
-python crazy_scanner.py --url https://example.com --output scan_report.html
+python  cli.py --url https://example.com --output scan_report.html
 
 # Show help menu
-python crazy_scanner.py --help
+python cli.py --help
 ```
 
 ## 📊 Report Example
